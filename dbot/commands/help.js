@@ -6,6 +6,6 @@ module.exports = {
         .setName('help')
         .setDescription('Returns list of commands or their description.'),
     async execute(interaction) {
-        interaction.reply('Currently being implemented.')
+        await interaction.reply('Currently being implemented.')
     }
 }
