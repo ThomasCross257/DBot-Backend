@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node index.ts"
+  },
+  "dependencies": {
+    "@discordjs/voice": "^0.8.0",
+    "discord.js": "^13.6.0",
+    "dotenv": "^16.0.0",
+    "libsodium-wrappers": "^0.7.9",
+    "ts-node": "^3.3.0",
+    "typescript": "^2.4.2",
+    "ytdl-core": "^4.10.1"
+  }
+}
