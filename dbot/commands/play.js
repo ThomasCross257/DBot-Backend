@@ -47,8 +47,11 @@ module.exports = {
     
             player.play(resource);
             connection.subscribe(player);
-    
+
             player.on(AudioPlayerStatus.Idle, () => connection.destroy());
+            player.on('error', error => {
+                console.error(`Error: ${error.message}, ${error.metadata}`);
+            });
         }
     } 
 }
