@@ -1,5 +1,4 @@
-// Someone please push this command to discord
-// with deploy-commands.js later
+// Committed and taken care of by Thomas. 2/24/22
 const { SlashCommandBuilder } = require('@discordjs/builders');
 
 module.exports = {
@@ -17,7 +16,7 @@ module.exports = {
         }
         let link = interaction.options.getString('link');
         if(link.includes("https://twitter.com")){
-            await interaction.reply(interaction.content.replace('https://twitter.com', 'https://fxtwitter.com'));
+            await interaction.reply(link.replace('https://twitter.com', 'https://fxtwitter.com')); // Echoes the URL specified by user with content replaced.
         }
         else{
             await interaction.reply("This is not a valid twitter link.");
