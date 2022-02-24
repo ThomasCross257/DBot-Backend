@@ -12,9 +12,9 @@ const client = new Client({
 client.commands = new Collection()
 const cooldowns =  new Collection();
 
-const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
+const eventFiles = fs.readdirSync('./dbot/events').filter(file => file.endsWith('.js'));
 for (const file of eventFiles) {
-	const event = require(`./events/${file}`);
+	const event = require(`./dbot/events/${file}`);
 	if (event.once) {
 		client.once(event.name, (...args) => event.execute(...args));
 	} else {
@@ -22,11 +22,11 @@ for (const file of eventFiles) {
 	}
 }
 
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const commandFiles = fs.readdirSync('./dbot/commands').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) 
 {
-	const command = require(`./commands/${file}`);
+	const command = require(`./dbot/commands/${file}`);
     client.commands.set(command.data.name, command);
     console.log(`Loaded command ${command.data.name}`);
 }
