@@ -9,7 +9,7 @@ module.exports = {
         .addStringOption(option =>                                               
                 option.setName('link')                                              // Removed subcommand and replaced with options
                     .setDescription('Fixes any Twitter link for desktop viewing')   // ----> No need for subcommand ... String Option is better suited
-                    .setRequired(false)),                                           
+                    .setRequired(true)),                                           
 	async execute(interaction) {
         if(!interaction.isCommand()) return;
 		if(!interaction.guild.available){ 
