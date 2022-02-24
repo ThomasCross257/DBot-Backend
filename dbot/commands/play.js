@@ -30,7 +30,7 @@ module.exports = {
                         .setRequired(true))),
     async execute(interaction) {
         if(!interaction.isCommand()) return;
-        if(!interaction.guild.available) return interaction.reply('I can not perform this opertation in this guild.');
+        if(!interaction.guild.available) return interaction.reply('I can not perform this operation in this guild.');
         if(!interaction.member.voice) return interaction.reply('You are not in a voice channel.');
 
         if(interaction.options.getSubcommand() == 'link') {
