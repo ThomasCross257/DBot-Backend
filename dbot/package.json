@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "dependencies": {
     "@discordjs/builders": "^0.12.0",
     "@discordjs/rest": "^0.3.0",
@@ -7,6 +8,19 @@
     "discord.js": "^13.6.0",
     "dotenv": "^16.0.0",
     "node-fetch": "^3.2.0",
+=======
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node index.ts"
+  },
+  "dependencies": {
+    "@discordjs/voice": "^0.8.0",
+    "discord.js": "^13.6.0",
+    "dotenv": "^16.0.0",
+    "libsodium-wrappers": "^0.7.9",
+    "ts-node": "^3.3.0",
+    "typescript": "^2.4.2",
+>>>>>>> parent of d8a04f9 (Merge branch 'prototype_1' of https://github.com/ThomasCross257/CSEBot-Project into prototype_1)
     "ytdl-core": "^4.10.1"
   }
 }
