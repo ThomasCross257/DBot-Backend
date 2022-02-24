@@ -26,7 +26,7 @@ const commandFiles = fs.readdirSync('./dbot/commands').filter(file => file.endsW
 
 for (const file of commandFiles) 
 {
-	const command = require(`./dbot/commands/${file}`);
+	const command = require(`./commands/${file}`);
     client.commands.set(command.data.name, command);
     console.log(`Loaded command ${command.data.name}`);
 }
