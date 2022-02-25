@@ -21,6 +21,8 @@ Currently D-Bot supports the following commands:
     - Will reply to user with the message 'Pong!'
 - Play
     - Will stream YouTube audio from any given link.
+- Meme
+    -Will post a random meme from reddit.
 # Installation
 Installation is as simple as cloning the Github repository.  
 First, simply clone the repo into your desired folder and cd into CSEBot-Project.  
