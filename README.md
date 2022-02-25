@@ -22,7 +22,7 @@ Currently D-Bot supports the following commands:
 - Play
     - Will stream YouTube audio from any given link.
 - Meme
-    -Will post a random meme from reddit.
+    - Will post a random meme from reddit.
 # Installation
 Installation is as simple as cloning the Github repository.  
 First, simply clone the repo into your desired folder and cd into CSEBot-Project.  
