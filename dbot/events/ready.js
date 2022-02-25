@@ -18,8 +18,7 @@ module.exports = {
 			{type: 'PLAYING'},																		// will update later
 		);
 		let interval_id = setInterval((client) => {
-			console.log('setInteveral called');
-			if(!client) {console.log('Client not found clearing interveral!');clearInterval(interval_id); return;}
+			if(!client) {clearInterval(interval_id); return;}
 			client.user.setActivity(
 				`I am in ${client.guilds.cache.size} server${client.guilds.cache.size > 1 ? 's': ''}!`,
 				{type: 'PLAYING'},
