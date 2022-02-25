@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "start": "node ./dbot/index.js"
+    "start": "node ./dbot/index.js",
+    "deploy": "node ./dbot/deploy-commands.js"
   },
   "dependencies": {
     "@discordjs/builders": "^0.12.0",
