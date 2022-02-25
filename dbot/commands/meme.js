@@ -7,12 +7,13 @@ module.exports = {
 		.setName('meme')
 		.setDescription('Posts a funny meme'),
 	async execute(interaction) {
-		axios.get('https://meme-api.herokuapp.com/gimme')
+		await axios.get('https://meme-api.herokuapp.com/gimme')
             .then((res) => {
-                await interaction.reply("Here's a funny meme! :)", res.data[0].url);
+                console.log(res.data);
+                interaction.reply(res.data.url);
             })
             .catch((err) => {
-                await interaction.reply("There was an error trying to retrieve the meme. Please try again!")
+                interaction.reply("There was an error trying to retrieve the meme. Please try again!")
                 console.log('ERROR:', err);
             })
 	},
