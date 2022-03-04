@@ -1,20 +1,20 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { default: axios } = require('axios');
-const { MessageEmbed, MessageActionRow, MessageButton, ButtonInteraction } = require('discord.js');
-
+const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
+const client = require("../index.js");
 module.exports = {
 	
 	data: new SlashCommandBuilder()
 		.setName('trivia')
 		.setDescription('Posts a random trivia question. Answer to earn points!'),
-	async execute(interaction) {
-		await axios.get('https://opentdb.com/api.php?amount=1')
+	async execute(interaction, message) {
+		await axios.get('https://opentdb.com/api.php?amount=1&type=multiple')
             .then((res) => {
 				// Meant for testing the API's output for future usage.
                 console.log(res.data.results[0]);
-				
+				global.correct_answer = res.data.results[0].correct_answer;
 				if (res.data.results[0].type == 'multiple'){
-					let answers_mult = [];
+					global.answers_mult = [];
 					for (let i = 0; i < res.data.results[0].incorrect_answers.length; i++) {
 						answers_mult.push(res.data.results[0].incorrect_answers[i]);
 					}
@@ -27,21 +27,25 @@ module.exports = {
 					const row_M = new MessageActionRow()
 						.addComponents(
 							new MessageButton()
-								.setCustomId(answers_mult[0])
-								.setLabel(answers_mult[0])
-								.setStyle('SUCCESS'),
+								.setCustomId(answers_mult[0] + " -mtrivia")
+								.setLabel('1')
+								.setStyle('SUCCESS')
+								.setDisabled(false),
 							new MessageButton()
-								.setCustomId(answers_mult[1])
-								.setLabel(answers_mult[1])
-								.setStyle('SUCCESS'),
+								.setCustomId(answers_mult[1] + " -mtrivia")
+								.setLabel('2')
+								.setStyle('SUCCESS')
+								.setDisabled(false),
 							new MessageButton()
-								.setCustomId(answers_mult[2])
-								.setLabel(answers_mult[2])
-								.setStyle('SUCCESS'),
+								.setCustomId(answers_mult[2] + " -mtrivia")
+								.setLabel('3')
+								.setStyle('SUCCESS')
+								.setDisabled(false),
 							new MessageButton()
-								.setCustomId(answers_mult[3])
-								.setLabel(answers_mult[3])
-								.setStyle('SUCCESS'),
+								.setCustomId(answers_mult[3]+ " -mtrivia")
+								.setLabel('4')
+								.setStyle('SUCCESS')
+								.setDisabled(false),
 						);
 					const TriviaEmbed_M = new MessageEmbed()
 						.setColor('#FF7F11')
@@ -56,39 +60,7 @@ module.exports = {
 							{ name: ':four: ', value: answers_mult[3]},
 						); 
 						interaction.reply({embeds:[TriviaEmbed_M], components: [row_M]});
-						// In need of a collector to gather responses from buttons and return them to console. Attempts are below.
-						/*
-						// Copied from discord.js's guide
-						const filter = i => i.customId === answers_mult[0] && i.user.id === '122157285790187530';
-						const collector = g.createMessageComponentCollector({ filter, time: 15000 });
-						collector.on('collect', async i => { 
-							if (i.customId === answers_mult[0]){
-								interaction.update({Content: "Button Clicked!", embeds:[], components: []})
-							}
-						});
-						collector.on('end', collected => console.log(`Collected ${collected.size} items`));
 
-						const filter = (ButtonInteraction)=>{
-							return interaction.user.id == ButtonInteraction.user.id
-						}
-						const collector = Channel.createMessageComponentCollector({
-							filter,
-							max: 1,
-							time: 1500
-
-						})
-						collector.on((ButtonInteraction) =>{
-							interaction.followUp("Button Clicked.")
-						})
-						collector.on('end', (collection) =>{
-							collection.forEach((ButtonInteraction) =>{
-								console.log("Works")
-							})
-							interaction.editReply("This question has expired!")
-						})
-						*/
-						answers_mult = [];
-					
 				}
 				else if (res.data.results[0].type == 'boolean'){
 					let answers_bool = [];
@@ -106,11 +78,11 @@ module.exports = {
 					const row_B = new MessageActionRow()
 						.addComponents(
 							new MessageButton()
-								.setCustomId(answers_bool[0])
+								.setCustomId(answers_bool[0] + " -btrivia")
 								.setLabel(answers_bool[0])
 								.setStyle('SUCCESS'),
 							new MessageButton()
-								.setCustomId(answers_bool[1])
+								.setCustomId(answers_bool[1] + " -btrivia")
 								.setLabel(answers_bool[1])
 								.setStyle('SUCCESS')
 						);
@@ -125,9 +97,15 @@ module.exports = {
 							{ name: ':regional_indicator_f: ', value: answers_bool[1]},
 						)
 					interaction.reply({embeds: [TriviaEmbed_B], components: [row_B]})
-						
 						//answers_bool = [];
 					}
+					/*
+				client.on("interactionCreate", (interaction)=>{
+					if (interaction.CustomId === "mtrivia"){
+						interaction.reply("Testing...")
+					}
+				})
+				*/
 				return;
             })
             .catch((err) => {
