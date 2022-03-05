@@ -1,12 +1,16 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { default: axios } = require('axios');
-const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
+const { MessageEmbed, MessageActionRow, MessageButton, Message } = require('discord.js');
 
 module.exports = {
 	
 	data: new SlashCommandBuilder()
 		.setName('trivia')
 		.setDescription('Posts a random trivia question. Answer to earn points!'),
+	/**
+	 * @param {CommandInteraction} interaction 
+	 * @param {Message} message
+	 */
 	async execute(interaction, message) {
 		await axios.get('https://opentdb.com/api.php?amount=1&type=multiple')
             .then((res) => {

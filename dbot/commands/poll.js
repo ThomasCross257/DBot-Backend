@@ -34,13 +34,15 @@ module.exports = {
 		const title = interaction.options.getString('title');
         const options_num = interaction.options.getInteger('options');
         
-        const option1 = interaction.options.getString('option 1');
-        const option2 = interaction.options.getString('option 2');
-        const option3 = interaction.options.getString('option 3');
-        const option4 = interaction.options.getString('option 4');
+        const option1 = interaction.options.getString('option1');
+        console.log(option1);
+        const option2 = interaction.options.getString('option2');
+        console.log(option2);
+        const option3 = interaction.options.getString('option3');
+        const option4 = interaction.options.getString('option4');
 
         // Block to determine what version of PollEmbed to use.       
-        
+        try{
         if (options_num > 4 || options_num < 2) {
             await interaction.reply("You can't have more than four or less than two poll options!")
         }
@@ -49,9 +51,9 @@ module.exports = {
             .setColor("#51BBFE")
             .setTitle(title)
             .addFields(
-                {name: option1},
-                {name: option2},
-            )
+                {name: ':one: ', value: option1, inline: true},
+                {name: ':two: ', value: option2, inline: true},
+            ) 
         let PollButtons = new MessageActionRow()
             .addComponents(
                 new MessageButton()
@@ -65,43 +67,48 @@ module.exports = {
                     .setStyle('PRIMARY')
                     .setDisabled(false),
             )
-        if (options_num === 3){
+        if (options_num > 4 || options_num < 2){
+            await interaction.reply("Options cannot be less than four and more than two!")
+        }
+        else if (options_num == 3){
             PollEmbed 
-                .addField(option3)
+                .addField(':three: ',option3,  true)
             PollButtons
                 .addComponents(
                     new MessageButton()
-                        .setCustomId("PollButton_2")
+                        .setCustomId("PollButton_3")
                         .setLabel('3')
                         .setStyle('PRIMARY')
                         .setDisabled(false),
                 )
         }
-        else if (options_num === 4){
+        else if (options_num == 4){
             PollEmbed
                 .addFields(
-                    {name: option3},
-                    {name: option4}
+                    {name: ':three: ', value: option3, inline: true},
+                    {name: ':four: ', value: option4, inline: true}
                 )
             PollButtons
                 .addComponents(
                     new MessageButton()
-                        .setCustomId("PollButton_2")
+                        .setCustomId("PollButton_3")
                         .setLabel('3')
                         .setStyle('PRIMARY')
                         .setDisabled(false),
                     new MessageButton()
-                        .setCustomId("PollButton_2")
+                        .setCustomId("PollButton_4")
                         .setLabel('4')
                         .setStyle('PRIMARY')
                         .setDisabled(false),
                 )
         }
-            
 
         await interaction.reply({embeds:[PollEmbed], components: [PollButtons]});
         }
-
-        
+    }
+       catch(error){
+           console.error(error);
+           await interaction.reply({content:"Something was wrong with your formatting. Please try again."}, {ephemeral:true});
+       } 
 	}
 }
