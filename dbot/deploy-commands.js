@@ -11,6 +11,9 @@ const guildId = process.env.GUILD_ID
 const token = process.env.BOT_TOKEN
 
 const commands = []
+
+//Still having issues with deploy commands. Need to fix in next update.
+
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
