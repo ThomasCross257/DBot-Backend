@@ -5,33 +5,29 @@ const { options } = require('request');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('poll')
-		.setDescription('Creates a poll.')
+		.setDescription('Creates a poll')
         .addStringOption(option =>                                               
             option.setName('title')
-                .setDescription('Title of the poll.')
+                .setDescription('Title of the poll')
                 .setRequired(true))
         .addIntegerOption(option =>                                               
             option.setName('options')
-                .setDescription('How many options for the poll. (Numbers Only)')
+                .setDescription('How many options for the poll')
                 .setRequired(true))
         .addStringOption(option =>                                               
-            option.setName('option 1')
+            option.setName('option1')
                 .setDescription('First option')
                 .setRequired(true))
         .addStringOption(option =>                                               
-            option.setName('option 2')
+            option.setName('option2') // For example options.setNAme('option 2') will throw an invalid form body. Use 'option2' instead.
                 .setDescription('Second option')
                 .setRequired(true))
         .addStringOption(option =>                                               
-            option.setName('option 3')
+            option.setName('option3')
                 .setDescription('Third option')
                 .setRequired(false))
         .addStringOption(option =>                                               
-            option.setName('option 4')
-                .setDescription('Fourth option')
-                .setRequired(false))
-        .addStringOption(option =>                                               
-            option.setName('option 4')
+            option.setName('option4')
                 .setDescription('Fourth option')
                 .setRequired(false)),
 	async execute(interaction) {
@@ -107,5 +103,5 @@ module.exports = {
         }
 
         
-	},
-};
+	}
+}

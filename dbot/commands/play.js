@@ -9,7 +9,7 @@ const {
 } = require('@discordjs/voice');
 
 module.exports = {
-    data:   new SlashCommandBuilder()
+    data: new SlashCommandBuilder()
         .setName('play')
         .setDescription('Play a Youtube video in voice chat')
         .addSubcommand(subcommand =>

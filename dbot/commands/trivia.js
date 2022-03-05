@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { default: axios } = require('axios');
 const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
-const client = require("../index.js");
+
 module.exports = {
 	
 	data: new SlashCommandBuilder()
@@ -113,5 +113,5 @@ module.exports = {
                 console.log('ERROR:', err);
                 return;
             })
-	},
-};
+	}
+}
