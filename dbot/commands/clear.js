@@ -7,8 +7,11 @@ module.exports = {
 		.addIntegerOption(option =>                                               
             option.setName('amount')
                 .setDescription('How many messages to clear.')
-                .setRequired(true)),
-	/*
+                .setRequired(true))
+		.addUserOption(option =>
+			option.setName('user')
+				.setDescription('User messages to clear')
+				.setRequired(false)),
 	/**
 	 * @param {CommandInteraction} interaction 
 	 */
@@ -18,22 +21,38 @@ module.exports = {
 			await interaction.reply('You do not have permission to use this command.');
             return;
 			}
-		await interaction.deferReply();
-		const Amount = interaction.options.getInteger('amount')
+		const Amount = interaction.options.getInteger('amount');
+		const User  = interaction.options.getMember('user');
         const {channel, options} = interaction;
 		const Messages = await channel.messages.fetch();
 		const ResponseEmbed = new MessageEmbed()
 		.setColor("WHITE");
+		
 		try{
+		if (User != undefined){
+			var i = 0;
+			const filtered = [];
+			(await Messages.filter(message =>{
+				if (message.author.id === User.id && Amount > i){
+					filtered.push(message);
+					i++;
+				}
+			}))
+			await channel.bulkDelete(filtered, true);
+			ResponseEmbed.setDescription(":white_check_mark: Removed: " + Amount + " messages successfully.").setColor("#44bd32");
+			await interaction.reply({embeds:[ResponseEmbed]})
+		}
+		else{
 			await channel.bulkDelete(Amount, true);
-			console.log("Bulk Delete working.")
-			ResponseEmbed.setDescription(":white_check_mark: Removed: " + Amount + " messages successfully removed.");
-			await interaction.editReply({embeds:ResponseEmbed});
+			ResponseEmbed.setDescription(":white_check_mark: Removed: " + Amount + " messages successfully.").setColor("#44bd32");
+			await interaction.reply({embeds:[ResponseEmbed]})
+		}
+
 		}
 		catch(error){
 			console.log(error);
-			ResponseEmbed.setDescription(":negative_squared_cross_mark:  Failed to remove mesages. Please try again later.");
-			await interaction.editReply({embeds:ResponseEmbed});
+			ResponseEmbed.setDescription(":negative_squared_cross_mark:  Failed to remove mesages. Please try again later.").setColor("#e84118");;
+			await interaction.reply({embeds:[ResponseEmbed]});
 		}
 	},
 };

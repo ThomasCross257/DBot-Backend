@@ -23,6 +23,17 @@ Currently D-Bot supports the following commands:
     - Will stream YouTube audio from any given link.
 - Meme
     - Will post a random meme from reddit.
+- Clear
+    - Will clear any messages (specified or not) from the current channel.
+Some commands that are available, but in an open beta include:
+<br>
+- Caption
+    - Adds a caption to an image.
+- Trivia
+    - Allows the user to earn points by answering trivia questions.
+- Poll
+    - User can create a poll that will last for 30 seconds with a maximum of four options.
+<br>
 # Installation
 Installation is as simple as cloning the Github repository.  
 First, simply clone the repo into your desired folder and cd into CSEBot-Project.  

@@ -13,7 +13,7 @@ client.commands = new Collection()
 const cooldowns =  new Collection();
 
 const eventFiles = fs.readdirSync('./dbot/events').filter(file => file.endsWith('.js'));
-// const commandFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js')); Comment out the top line when you want to deploy commands
+// const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 for (const file of eventFiles) {
 	const event = require(`./events/${file}`);
 	if (event.once) {
@@ -24,7 +24,7 @@ for (const file of eventFiles) {
 }
 
 const commandFiles = fs.readdirSync('./dbot/commands').filter(file => file.endsWith('.js'));
-// const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js')); Comment out the top line when you want to deploy commands
+// const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) 
 {
