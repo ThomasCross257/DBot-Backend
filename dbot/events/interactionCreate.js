@@ -5,15 +5,6 @@ module.exports = {
 		if (!interaction.isCommand()) {
 			return;
 		}
-		/*
-		else if (!interaction.isButton()){
-			return interaction;
-			
-			if (interaction.customID === "mtrivia"){
-				interaction.reply({content:"Test.", ephemeral: true});
-			}
-			
-		}*/
 		const command = client.commands.get(interaction.commandName);
 
 		if (!command){

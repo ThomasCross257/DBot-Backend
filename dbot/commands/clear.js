@@ -39,7 +39,7 @@ module.exports = {
 				}
 			}))
 			await channel.bulkDelete(filtered, true);
-			ResponseEmbed.setDescription(":white_check_mark: Removed: " + Amount + " messages successfully.").setColor("#44bd32");
+			ResponseEmbed.setDescription(":white_check_mark: Removed: " + Amount + " messages from" + User + "successfully.").setColor("#44bd32");
 			await interaction.reply({embeds:[ResponseEmbed]})
 		}
 		else{

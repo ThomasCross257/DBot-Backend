@@ -25,12 +25,12 @@ Currently D-Bot supports the following commands:
     - Will post a random meme from reddit.
 - Clear
     - Will clear any messages (specified or not) from the current channel.
+- Trivia
+    - Allows the user to answer trivia commands within a set interval.
 Some commands that are available, but in an open beta include:
 <br>
 - Caption
     - Adds a caption to an image.
-- Trivia
-    - Allows the user to earn points by answering trivia questions.
 - Poll
     - User can create a poll that will last for 30 seconds with a maximum of four options.
 <br>

@@ -38,5 +38,23 @@ for (const file of commandFiles)
 	 */ 
 }
 
+client.on('interactionCreate', async (interaction)=>{
+	if (interaction.isButton()){
+		console.log(interaction);
+		if (interaction.customId.includes(' -triv')){
+			const usrAns = interaction.customId.replace(' -triv', '');
+			if(usrAns == correct_answer){
+				gotCorrect = true;
+			}
+			else{
+				gotCorrect = false;
+			}
+			interaction.reply({content:"Your response has been recorded."}, {ephemeral: true}); //Ephemeral response for some reason doesn't work?
+		}
+	}
+	else{
+		return;
+	}
+})
 
 client.login(TOKEN)
