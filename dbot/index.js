@@ -1,16 +1,30 @@
 const fs = require('fs')
 const dotenv = require('dotenv')
 const {Client, Collection, Intents} = require('discord.js')
+const mongoose = require('mongoose');
+const profileSchema = require('./models/profileSchema')
 
 dotenv.config()
 
 const TOKEN = process.env.BOT_TOKEN
 const client = new Client({
-    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_BANS, Intents.FLAGS.GUILD_VOICE_STATES, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS],
+    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_BANS, Intents.FLAGS.GUILD_VOICE_STATES, Intents.FLAGS.GUILD_MESSAGES, 
+		Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS],
 })
 
 client.commands = new Collection()
 const cooldowns =  new Collection();
+
+mongoose.connect(process.env.MONGO_ID,{
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+	keepAlive: true,
+}).then(()=>{
+	console.log("Database Connection established.");
+}).catch((err) => {
+	console.log("Error connecting to Mongo database.");
+	console.log(err);
+})
 
 const eventFiles = fs.readdirSync('./dbot/events').filter(file => file.endsWith('.js'));
 // const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
@@ -31,11 +45,6 @@ for (const file of commandFiles)
 	const command = require(`./commands/${file}`);
     client.commands.set(command.data.name, command);
     console.log(`Loaded command ${command.data.name}`);
-	// Main error comes from here. Command may be loaded in. All commands load in normally, however when when it reaches trivia.js it throws this:
-	/*
-		Error from before has been solved.
-		An note for any backened dev that plans to add commands in the future (DO NOT put spaces in their options.)
-	 */ 
 }
 
 client.on('interactionCreate', async (interaction)=>{
@@ -55,6 +64,24 @@ client.on('interactionCreate', async (interaction)=>{
 	else{
 		return;
 	}
-})
+});
+client.on('guildMemberAdd', async member=>{ //guildMemberAdd doesn't seem to be triggering whenever a member joins the server.
+	
+	console.log("Guildmemberadd successful.")
+	let newUser = await profileSchema.create({
+		userTag: member.id,
+    	serverID: member.guild.id,
+    	experience: 0,
+    	level: 1,
+	});
+	newUser.save(function(err){
+		if (err){ 
+			console.long(err);
+			console.log(member.id);
+			console.log(member.guild.id);
+		}
+	});
+	
+});
 
 client.login(TOKEN)

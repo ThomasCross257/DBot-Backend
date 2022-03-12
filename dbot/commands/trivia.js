@@ -1,6 +1,8 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { default: axios } = require('axios');
 const { MessageEmbed, MessageActionRow, MessageButton, Message } = require('discord.js');
+const mongoose = require('mongoose');
+const profileSchema = require('../models/profileSchema');
 
 module.exports = {
 	
@@ -32,6 +34,8 @@ module.exports = {
 				// Global variables for index.js to reference
 				global.correct_answer = res.data.results[0].correct_answer;
 				global.gotCorrect = null;
+				// Defines the comparison variable for the user's interaction.
+				const UserIDComp = profileSchema.find({userID: interaction.user.id});
 				const row = new MessageActionRow()
 					.addComponents(
 						new MessageButton()
@@ -84,7 +88,19 @@ module.exports = {
 				function DetermineAnswer(res){
 					if (res === true){
 						interaction.editReply({embeds:[CorrectEmbed], components: []});
+						/*
+							const correct = profileSchema.findOneAndUpdate({
+								userID: interaction.user.id,
+							},
+							{
+							$inc:{
+								experience: 10,
+							},
+							},
+						);
+						*/
 					}
+					
 					else if(res === false){
 						interaction.editReply({embeds:[IncorrectEmbed], components: []});
 					}
