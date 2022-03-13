@@ -3,6 +3,7 @@ const dotenv = require('dotenv')
 const {Client, Collection, Intents} = require('discord.js')
 const mongoose = require('mongoose');
 const profileSchema = require('./models/profileSchema')
+const pollModel = require('./models/pollSchema')
 
 dotenv.config()
 
@@ -59,6 +60,9 @@ client.on('interactionCreate', async (interaction)=>{
 				gotCorrect = false;
 			}
 			interaction.reply({content:"Your response has been recorded."}, {ephemeral: true}); //Ephemeral response for some reason doesn't work?
+		}
+		else if(interaction.customId.includes('PollButton')){
+			return;
 		}
 	}
 	else{

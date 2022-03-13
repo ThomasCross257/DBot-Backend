@@ -1,10 +1,9 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageAttachment } = require('discord.js')
 const canvacord = require("canvacord");
-/*
 const mongoose = require('mongoose');
-const profileSchema = require('../models/profileSchema')
-*/
+const profileModel = require('../models/profileSchema')
+
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -17,24 +16,30 @@ module.exports = {
 	async execute(interaction) {
 		console.log(interaction)
 		const avatar = "https://cdn.discordapp.com/embed/avatars/0.png";
-/*
-		Oddly enough, the registration command logs my account and the exact tag into the database, though it doesn't seem to see the registered schema for it.
-		const User = mongoose.model(interaction.member.user.id);
+		const background = "https://cdn.discordapp.com/attachments/952666801077108916/952666810501705788/Default_Level.png"
+		try{
+			profileModel.find({userID: interaction.user.id}, function(res){
+				var LVL = Number(res[0].toObject().level);
+				var EXP = Number(res[0].toObject().experience)
+				const levelScreen = new canvacord.Rank()
+					.setAvatar(avatar)
+					.setCurrentXP(EXP)
+					.setLevel(LVL)
+					.setBackground("IMAGE", background)
+					.setRequiredXP(500)
+					.setProgressBar("#FFFFFF", "COLOR")
+					.setUsername(interaction.user.username)
+					.setDiscriminator(interaction.member.user.discriminator);
+				levelScreen.build().then(data =>{
+				const attachment = new MessageAttachment(data, "RankCard.png");
+				interaction.reply({files: [attachment]});
+				})	
+			});
+		}
+		catch (err) {
+			interaction.reply("Error trying to retrieve level! Make sure you're registered with the bot.")
+		}
 
-		const query = User.findOne({userID: User});
-
-		console.log(query);
-*/
-		const levelScreen = new canvacord.Rank()
-			.setAvatar(avatar)
-			.setCurrentXP(1)
-			.setRequiredXP(500)
-			.setProgressBar("#FFFFFF", "COLOR")
-			.setUsername(interaction.user.username)
-			.setDiscriminator(interaction.member.user.discriminator);
-		levelScreen.build().then(data =>{
-			const attachment = new MessageAttachment(data, "RankCard.png");
-			interaction.reply({files: [attachment]});
-		})	
+		
 	},
 };

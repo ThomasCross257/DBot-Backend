@@ -4,19 +4,14 @@ var pollSchema = new mongoose.Schema({
     userID: {
         type: String, 
         require: true, 
-        unique: true
     },
     pollID: {
         type: Number, 
         default: Math.floor(Math.random() *  100000),
+        unique: true
     },
     serverID: {
         type: String, 
-        require: true
-    },
-    pollOptions: {
-        type: Number, 
-        default: 2,
         require: true
     },
     option1: {
