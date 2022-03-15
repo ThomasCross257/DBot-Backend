@@ -29,7 +29,7 @@ mongoose.connect(process.env.MONGO_ID,{
 	console.log(err);
 })
 
-const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
+const eventFiles = fs.readdirSync('./dbot/events').filter(file => file.endsWith('.js'));
 for (const file of eventFiles) {
 	const event = require(`./events/${file}`);
 	console.log(`Loaded event ${event.name}`);
@@ -40,7 +40,7 @@ for (const file of eventFiles) {
 	}
 }
 
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const commandFiles = fs.readdirSync('./dbot/commands').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) 
 {
