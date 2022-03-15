@@ -27,6 +27,7 @@ Currently D-Bot supports the following commands:
     - Will clear any messages (specified or not) from the current channel.
 - Trivia
     - Allows the user to answer trivia commands within a set interval.
+    
 Some commands that are available, but in an open beta include:
 <br>
 
