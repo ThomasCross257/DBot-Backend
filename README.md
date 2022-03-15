@@ -65,5 +65,5 @@ npm run
 ```
 and if you wish to deploy your newly added commands run the following command in the root folder
 ```bash
-npm deploy
+npm run deploy
 ```
