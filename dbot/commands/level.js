@@ -17,13 +17,12 @@ module.exports = {
 		console.log(interaction)
 		const avatar = "https://cdn.discordapp.com/embed/avatars/0.png";
 		const background = "https://cdn.discordapp.com/attachments/952666801077108916/952666810501705788/Default_Level.png"
-		try{
 			profileModel.find({userID: interaction.user.id}, (err, user) => {
 				if(err) {
 					return interaction.reply("User not found! Are you registered?");
 				} else {
-					const level = Number(user.level);
-					const exp = Number(user.experience);
+					const level = Number(user[0].level); // Must use [0] to index schemas. Think of each one like you would the meme API.
+					const exp = Number(user[0].experience);
 					const levelScreen = new canvacord.Rank()
 					.setAvatar(avatar)
 					.setCurrentXP(exp)
@@ -39,15 +38,8 @@ module.exports = {
 					})
 				}
 			});
-
 		}
-		catch (err) {
-			interaction.reply("Error trying to retrieve level! Make sure you're registered with the bot.")
-		}
-
-		
-	},
-};
+	}
 
 /*
 console.log(res[0].toObject());
