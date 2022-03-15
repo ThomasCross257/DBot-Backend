@@ -29,11 +29,14 @@ Currently D-Bot supports the following commands:
     - Allows the user to answer trivia commands within a set interval.
 Some commands that are available, but in an open beta include:
 <br>
+
 - Caption
     - Adds a caption to an image.
 - Poll
     - User can create a poll that will last for 30 seconds with a maximum of four options.
+
 <br>
+
 # Installation
 Installation is as simple as cloning the Github repository.  
 First, simply clone the repo into your desired folder and cd into CSEBot-Project.  
@@ -50,6 +53,10 @@ D-Bot will require you to have the following variables
 1. BOT_TOKEN
 2. CLIENT_ID
 3. GUILD_ID
+4. DASHBOARD_PORT
+5. MONGO_ID
+6. CLIENT_SECRET
+7. SERVER_SECRET
 <!-- -->
 Finally, you can run D-bot by running the following command in the root folder
 ```bash

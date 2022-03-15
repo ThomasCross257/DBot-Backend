@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "node ./dbot/index.js",
+    "start": "node ./dashboard/index.js",
     "deploy": "node ./dbot/deploy-commands.js"
   },
   "dependencies": {
@@ -21,6 +21,8 @@
     "mongoose": "^6.2.5",
     "mongoose-long": "^0.5.1",
     "node-fetch": "^2.6.6",
+    "passport": "^0.5.2",
+    "passport-discord": "^0.1.4",
     "request": "^2.88.2",
     "sharp": "^0.30.2",
     "ytdl-core": "^4.10.1"

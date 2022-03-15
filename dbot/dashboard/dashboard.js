@@ -1,3 +1,8 @@
+/**
+ * Going to move this outside
+ * the dbot folder and into its own
+ * folder
+ */
 const http = require('http');
 const express = require('express')
 const app = express()

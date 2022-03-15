@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-var profileSchema = new mongoose.Schema({
+// Avoid using var
+const profileSchema = new mongoose.Schema({
     userID: {
         type: String, 
         require: true, 
@@ -20,6 +21,6 @@ var profileSchema = new mongoose.Schema({
     },
 });
 
-var profileModel = mongoose.model('UserProfile', profileSchema,);
+const profileModel = mongoose.model('pointusers', profileSchema);
 
 module.exports = profileModel; 

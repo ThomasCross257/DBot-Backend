@@ -10,12 +10,14 @@ dotenv.config()
 const TOKEN = process.env.BOT_TOKEN
 const client = new Client({
     intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_BANS, Intents.FLAGS.GUILD_VOICE_STATES, Intents.FLAGS.GUILD_MESSAGES, 
-		Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS],
+		Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_MEMBERS],
 })
-
+// ^^ Included GUILD MEMBERS intent ... guidlMembersAdd should work now
 client.commands = new Collection()
 const cooldowns =  new Collection();
 
+// Going to move this else where in a later version
+// to reduce visual cluter
 mongoose.connect(process.env.MONGO_ID,{
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
@@ -28,9 +30,9 @@ mongoose.connect(process.env.MONGO_ID,{
 })
 
 const eventFiles = fs.readdirSync('./dbot/events').filter(file => file.endsWith('.js'));
-// const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 for (const file of eventFiles) {
 	const event = require(`./events/${file}`);
+	console.log(`Loaded event ${event.name}`);
 	if (event.once) {
 		client.once(event.name, (...args) => event.execute(...args));
 	} else {
@@ -39,7 +41,6 @@ for (const file of eventFiles) {
 }
 
 const commandFiles = fs.readdirSync('./dbot/commands').filter(file => file.endsWith('.js'));
-// const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) 
 {
@@ -48,44 +49,10 @@ for (const file of commandFiles)
     console.log(`Loaded command ${command.data.name}`);
 }
 
-client.on('interactionCreate', async (interaction)=>{
-	if (interaction.isButton()){
-		console.log(interaction);
-		if (interaction.customId.includes(' -triv')){
-			const usrAns = interaction.customId.replace(' -triv', '');
-			if(usrAns == correct_answer){
-				gotCorrect = true;
-			}
-			else{
-				gotCorrect = false;
-			}
-			interaction.reply({content:"Your response has been recorded."}, {ephemeral: true}); //Ephemeral response for some reason doesn't work?
-		}
-		else if(interaction.customId.includes('PollButton')){
-			return;
-		}
-	}
-	else{
-		return;
-	}
-});
-client.on('guildMemberAdd', async member=>{ //guildMemberAdd doesn't seem to be triggering whenever a member joins the server.
-	
-	console.log("Guildmemberadd successful.")
-	let newUser = await profileSchema.create({
-		userTag: member.id,
-    	serverID: member.guild.id,
-    	experience: 0,
-    	level: 1,
-	});
-	newUser.save(function(err){
-		if (err){ 
-			console.long(err);
-			console.log(member.id);
-			console.log(member.guild.id);
-		}
-	});
-	
-});
+// Moved all the events in to the events folder
 
 client.login(TOKEN)
+
+module.exports = { 
+	client: client
+}
