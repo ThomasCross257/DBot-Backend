@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
 
-var ticketSchema = new mongoose.Schema({
+const ticketSchema = new mongoose.Schema({
     userID: {
         type: String, 
-        require: true, 
-        unique: true
+        require: true
     },
     serverID: {
         type: String, 
@@ -18,6 +17,7 @@ var ticketSchema = new mongoose.Schema({
     ticketID:{
         type: String, 
         default: 0,
+        unique: true,
     },
     resolved:{
         type: Boolean, 
@@ -25,6 +25,7 @@ var ticketSchema = new mongoose.Schema({
     },
     response:{
         type: String,
+        default: "Developer has not responded to this ticket yet."
     }
 });
 

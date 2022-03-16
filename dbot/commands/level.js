@@ -21,7 +21,7 @@ module.exports = {
 				if(err) {
 					return interaction.reply("User not found! Are you registered?");
 				} else {
-					const level = Number(user[0].level); // Must use [0] to index schemas. Think of each one like you would the meme API.
+					const level = Number(user[0].level); // Must use [0] to index schemas. Think of each one like you would the trivia API.
 					const exp = Number(user[0].experience);
 					const levelScreen = new canvacord.Rank()
 					.setAvatar(avatar)

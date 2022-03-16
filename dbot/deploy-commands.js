@@ -12,16 +12,6 @@ const token = process.env.BOT_TOKEN
 
 const commands = []
 
-/*
-To any Backened dev having issues with the deploy-commands.js file. Follow these steps.
-
-1. Change directories in index.js from ./dbot/commands and ./dbot/events To ./commands and ./events).
-
-2. Move the .env file into dbot's directory  and use node deploy-commands.js
-
-3. Reverse the above steps (aside from node deploy-commands.js and don't change const command = require(`./commands/${file}`)) to run and test the bot.
-*/
-
 /**
  * If you keep running into a path error then youare not running
  * "npm run deploy" or "npm start" in the root directory.
