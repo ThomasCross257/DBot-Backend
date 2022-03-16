@@ -15,7 +15,9 @@ module.exports = {
 				.setRequired(false)),
 	async execute(interaction) {
 		console.log(interaction)
-		const avatar = "https://cdn.discordapp.com/embed/avatars/0.png";
+		var avatar = interaction.user.avatarURL(true);
+		avatar = avatar.replace('.webp','.png'); // Shoddy method of avoiding errors with image types. Necessary since avatarURL doesn't use
+		console.log(avatar);
 		const background = "https://cdn.discordapp.com/attachments/952666801077108916/952666810501705788/Default_Level.png"
 			profileModel.find({userID: interaction.user.id}, (err, user) => {
 				if(err) {
