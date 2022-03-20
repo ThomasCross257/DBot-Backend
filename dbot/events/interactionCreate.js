@@ -26,7 +26,7 @@ module.exports = {
 				}
 				interaction.reply({content:"Your response has been recorded.", ephemeral: true}); //Ephemeral response for some reason doesn't work?
 			}
-			else if (interaction.customId.includes('PollButton')){
+			if (interaction.customId.includes('PollButton')){ // Untested Code. Having trouble with InteractionCreate
 				const customID = interaction.customId
 				const IDArr = customID.split(" ");
 				var pollNumID = IDArr[0]
@@ -58,6 +58,9 @@ module.exports = {
 						interaction.editReply({content:"Your response has been recorded.", ephemeral: true});
 					}
 				})
+			}
+			if(interaction.customId.includes("ReactBTN")){
+				console.log(interaction);
 			}
 		}
 		else{
