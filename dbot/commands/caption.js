@@ -25,6 +25,8 @@ module.exports = {
 		if(!interaction.guild.available){ 
             await interaction.reply('I can not perform this operation in this guild.');
         }
+        await interaction.reply('Currently In Development. Will be released in prototype 2');
+        /*
         const link = interaction.options.getString('link');
         //interaction.options.getString('caption');
         const caption = "Russia Gaming";
@@ -61,5 +63,6 @@ module.exports = {
         await interaction.editReply({ content: "Error. Image did not process correctly!", ephemeral: true })
         console.log(err);
     }
+    */
 	}
 }

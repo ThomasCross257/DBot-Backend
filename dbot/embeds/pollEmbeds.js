@@ -18,16 +18,16 @@ function pollEmbedGen (option1, option2, option3, option4, title/*, ID*/){
     }
     return PollEmbed;
 }
-function pollButtonsGen(option3, option4){
+function pollButtonsGen(option3, option4, PollID){
     let PollButtons = new MessageActionRow()
         .addComponents(
             new MessageButton()
-                .setCustomId("PollButton_1")
+                .setCustomId(PollID + "PollButton_1")
                 .setLabel('1')
                 .setStyle('PRIMARY')
                 .setDisabled(false),
             new MessageButton()
-                .setCustomId("PollButton_2")
+                .setCustomId(PollID + "PollButton_2")
                 .setLabel('2')
                 .setStyle('PRIMARY')
                 .setDisabled(false),
@@ -35,7 +35,7 @@ function pollButtonsGen(option3, option4){
         if (option3 != undefined){
             PollButtons.addComponents(
                     new MessageButton()
-                        .setCustomId("PollButton_3")
+                        .setCustomId(PollID + "PollButton_3")
                         .setLabel('3')
                         .setStyle('PRIMARY')
                         .setDisabled(false),
@@ -44,12 +44,12 @@ function pollButtonsGen(option3, option4){
         else if (option3 != undefined && option4 != undefined){
             PollButtons.addComponents(
                     new MessageButton()
-                        .setCustomId("PollButton_3")
+                        .setCustomId(PollID + "PollButton_3")
                         .setLabel('3')
                         .setStyle('PRIMARY')
                         .setDisabled(false),
                     new MessageButton()
-                        .setCustomId("PollButton_4")
+                        .setCustomId(PollID + "PollButton_4")
                         .setLabel('4')
                         .setStyle('PRIMARY')
                         .setDisabled(false),
@@ -58,7 +58,7 @@ function pollButtonsGen(option3, option4){
         else if (option3 === undefined && option4 != undefined){
             PollButtons.addComponents(
                     new MessageButton()
-                        .setCustomId("PollButton_3")
+                        .setCustomId(PollID + "PollButton_3")
                         .setLabel('3')
                         .setStyle('PRIMARY')
                         .setDisabled(false),

@@ -16,7 +16,7 @@ module.exports = {
                 .setDescription('First option')
                 .setRequired(true))
         .addStringOption(option =>                                               
-            option.setName('option2') // For example options.setNAme('option 2') will throw an invalid form body. Use 'option2' instead.
+            option.setName('option2')
                 .setDescription('Second option')
                 .setRequired(true))
         .addStringOption(option =>                                               
@@ -35,17 +35,20 @@ module.exports = {
         const option4 = interaction.options.getString('option4');
      
         try{
-            // var PollID;
-            /*
-            pollModel.create({userID: interaction.member.user.id, serverID: interaction.guild.id});
-            pollModel.find({userID: interaction.member.user.id,}, function(res){
-                PollID = Number(res[0].toObject().pollID)
+
+            pollModel.create({
+                userID: interaction.member.user.id, 
+                pollID: interaction.id, //Interaction IDs are always unique and won't run into the possible issue of using math floor.
+                serverID: interaction.guild.id,
+                });
+            pollModel.find({pollID: interaction.id }, (res) => {
+                console.log(res);
+                const pollEmbed = pollEmbedGen(option1, option2, option3, option4, title, interaction.id);
+                const pollButtons = pollButtonsGen(option3, option4)
+                interaction.reply({embeds:[pollEmbed], components: [pollButtons]});
+                console.log(interaction);
             })
-            */
-            const pollEmbed = pollEmbedGen(option1, option2, option3, option4, title/*,PollID*/);
-            const pollButtons = pollButtonsGen(option3, option4)
-            interaction.reply({embeds:[pollEmbed], components: [pollButtons]});
-            // console.log(PollID);
+            
         }
        catch(error){
            console.error(error);

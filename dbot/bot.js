@@ -1,17 +1,18 @@
 const fs = require('fs')
 const dotenv = require('dotenv')
-const {Client, Collection, Intents} = require('discord.js')
+const { Client, Collection, Intents } = require('discord.js')
 const mongoose = require('mongoose');
-const profileSchema = require('./models/profileSchema')
-const pollModel = require('./models/pollSchema')
+// const profileSchema = require('./models/profileSchema')
+// const pollModel = require('./models/pollSchema')
 
 dotenv.config()
 
-const TOKEN = process.env.BOT_TOKEN
 const client = new Client({
     intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_BANS, Intents.FLAGS.GUILD_VOICE_STATES, Intents.FLAGS.GUILD_MESSAGES, 
 		Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_MEMBERS],
 })
+
+const TOKEN = process.env.BOT_TOKEN
 // ^^ Included GUILD MEMBERS intent ... guidlMembersAdd should work now
 client.commands = new Collection()
 const cooldowns =  new Collection();

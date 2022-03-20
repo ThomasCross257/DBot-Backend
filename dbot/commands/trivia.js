@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { default: axios } = require('axios');
-const {TimeoutEmbed, correctEmbedGen, IncorrectEmbed, questionEmbedGen, buttonGen} = require ('../embeds/triviaEmbeds')
+const {TimeoutEmbed, correctEmbedGen, IncorrectEmbed, questionEmbedGen, buttonGen, SortTrivia} = require ('../embeds/triviaEmbeds')
 const profileModel = require('../models/profileSchema');
 
 module.exports = {
@@ -26,12 +26,14 @@ module.exports = {
 				}
 				answers.push(res.data.results[0].correct_answer);
 				// For testing purposes only.
+				
+				answers = SortTrivia(answers);
+				
 				for (let i = 0; i < answers.length; i++) {
 					console.log(answers[i]);
 				}
-				//Should randomly sort the function so the answer isn't consistently in the same order.
 				
-				// Global variables for index.js to reference
+				// Global variables for interactionCreate.js to reference
 				global.correct_answer = res.data.results[0].correct_answer;
 				global.gotCorrect = null;
 				// Defines the comparison variable for the user's interaction.

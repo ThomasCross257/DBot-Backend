@@ -59,4 +59,14 @@ const IncorrectEmbed = new MessageEmbed()
     .setTitle("Incorrect!")
     .setDescription("You got this question wrong. Try again later!")
 
-module.exports = {buttonGen, questionEmbedGen, correctEmbedGen, TimeoutEmbed, IncorrectEmbed};
+function SortTrivia(arr){ // Using Fischer-Yates method to randomly sort answers.
+	for (let i = arr.length -1; i > 0; i--){
+		const j = Math.floor(Math.random() * i);
+		let k = arr[i];
+		arr[i] = arr[j];
+		arr[j] = k;
+	}
+	return arr;
+}
+
+module.exports = {buttonGen, questionEmbedGen, correctEmbedGen, TimeoutEmbed, IncorrectEmbed, SortTrivia};
