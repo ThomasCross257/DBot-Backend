@@ -15,10 +15,6 @@ const profileSchema = new mongoose.Schema({
         type: Number, 
         default: 0
     },
-    level: {
-        type: Number, 
-        default: 1
-    },
 });
 
 const profileModel = mongoose.model('pointusers', profileSchema);
