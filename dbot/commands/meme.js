@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { default: axios } = require('axios');
+const { MessageEmbed } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -9,7 +10,15 @@ module.exports = {
 		await axios.get('https://meme-api.herokuapp.com/gimme')
             .then((res) => {
                 console.log(res.data);
-                interaction.reply(res.data.url);
+                const url = res.data.url;
+                const subreddit = res.data.subreddit;
+                const title = res.data.title;
+                const MemeEmbed = new MessageEmbed()
+                    .setColor("#4281A4")
+                    .setTitle(title)
+                    .addField("From: ", "r/" + subreddit, true)
+                    .setImage(url);
+                interaction.reply({embeds: [MemeEmbed]});
                 return;
             })
             .catch((err) => {
