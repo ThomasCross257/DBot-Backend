@@ -55,6 +55,30 @@ module.exports = {
 			}
 			if(interaction.customId.includes("ReactBTN")){ // Role Reaction Manager
 				console.log(interaction);
+				const ReactID = interaction.customId.split(" ");
+				const roleID = ReactID[0];
+				var roleNameArr = [];
+				for (let i = 1; i < ReactID.length; i++){
+					if(ReactID === "ReactBTN"){
+						break;
+					}
+					else{
+						roleNameArr[i] = ReactID[i]
+					}
+				}
+				roleNameArr.pop();
+				const roleName = roleNameArr.join(' ');
+				console.log(roleName)
+				if(interaction.member.roles.cache.find(r => r.id === roleID)){
+					interaction.member.roles.remove(roleID);
+					interaction.reply({ content: "Removed role " + roleName + " from " + interaction.member.user.tag, ephemeral: true} );
+				}
+				else{
+					interaction.member.roles.add(roleID);
+					interaction.reply({content: "Gave role " + roleName + " to " + interaction.member.user.tag, ephemeral: true} );
+				
+				}
+				
 			}
 		}
 		else{

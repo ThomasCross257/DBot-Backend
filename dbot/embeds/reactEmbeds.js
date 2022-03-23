@@ -37,34 +37,34 @@ function reactButtonGen (role1, role2, role3, role4, role5){
     let ReactButtons = new MessageActionRow()
         .addComponents(
             new MessageButton()
-                .setCustomId(role1.id + " ReactBTN1")
+                .setCustomId(role1.id + " " + role1.name +  " ReactBTN1")
                 .setLabel(role1Emoji + " " + role1.name)
                 .setStyle('PRIMARY')
                 .setDisabled(false),
         )
         if (role2 != undefined){
-        ReactButtons.addComponents(new MessageButton().setCustomId(role2.id + " ReactBTN2")
+        ReactButtons.addComponents(new MessageButton().setCustomId(role2.id + " " + role2.name + " ReactBTN2")
                 .setLabel(role2Emoji + " " + role2.name)
                 .setStyle('PRIMARY')
                 .setDisabled(false),
         )
     } 
     if (role3 != undefined){
-        ReactButtons.addComponents(new MessageButton().setCustomId(role3.id + " ReactBTN3")
+        ReactButtons.addComponents(new MessageButton().setCustomId(role3.id + " " + role3.name + " ReactBTN3")
                 .setLabel(role3Emoji + " " + role3.name)
                 .setStyle('PRIMARY')
                 .setDisabled(false),
         )
     }
     if (role4 != undefined){
-        ReactButtons.addComponents(new MessageButton().setCustomId(role4.id + " ReactBTN4")
+        ReactButtons.addComponents(new MessageButton().setCustomId(role4.id + " " + role4.name + " ReactBTN4")
                 .setLabel(role4Emoji + " " + role4.name)
                 .setStyle('PRIMARY')
                 .setDisabled(false),
         )
     }
     if (role5 != undefined){
-        ReactButtons.addComponents(new MessageButton().setCustomId(role5.id + " ReactBTN5")
+        ReactButtons.addComponents(new MessageButton().setCustomId(role5.id + " " + role5.name + " ReactBTN5")
                 .setLabel(role5Emoji + " " + role5.name)
                 .setStyle('PRIMARY')
                 .setDisabled(false),

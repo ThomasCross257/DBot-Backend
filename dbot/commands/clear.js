@@ -23,6 +23,7 @@ module.exports = {
 			}
 		const Amount = interaction.options.getInteger('amount');
 		const User  = interaction.options.getMember('user');
+		console.log(User);
         const {channel, options} = interaction;
 		const Messages = await channel.messages.fetch();
 		const ResponseEmbed = new MessageEmbed()
@@ -39,7 +40,7 @@ module.exports = {
 				}
 			}))
 			await channel.bulkDelete(filtered, true);
-			ResponseEmbed.setDescription(":white_check_mark: Removed: " + Amount + " messages from" + User + "successfully.").setColor("#44bd32");
+			ResponseEmbed.setDescription(":white_check_mark: Removed: " + Amount + " messages from " + User.user.username + " successfully.").setColor("#44bd32");
 			await interaction.reply({embeds:[ResponseEmbed]})
 		}
 		else{
