@@ -3,7 +3,7 @@
         <br>
             <img src="https://github.com/ThomasCross257/CSEBot-Project/blob/prototype_1/res/D-BotLogo2.png?raw=true" alt="DBot">
         <br>
-            CSEBot - Dbot
+            CSEBot - Dbot: Prototype-1
         <br>
     </h1>
 </div>
@@ -27,14 +27,10 @@ Currently D-Bot supports the following commands:
     - Will clear any messages (specified or not) from the current channel.
 - Trivia
     - Allows the user to answer trivia commands within a set interval.
-    
-Some commands that are available, but in an open beta include:
-<br>
-
-- Caption
-    - Adds a caption to an image.
 - Poll
-    - User can create a poll that will last for 30 seconds with a maximum of four options.
+    - User can create a poll that will last for however many minutes the user specifies with a maximum of four options.
+    
+
 
 <br>
 
@@ -53,7 +49,7 @@ Third, setup your system variables, by either editing your path variables or by 
 D-Bot will require you to have the following variables  
 1. BOT_TOKEN
 2. CLIENT_ID
-3. GUILD_ID
+3. GUILD_ID (Optional in case you'd like to have a guild-exclusive version with your own commands.)
 4. DASHBOARD_PORT
 5. MONGO_ID
 6. CLIENT_SECRET
