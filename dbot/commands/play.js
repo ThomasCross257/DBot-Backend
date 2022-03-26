@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const { MessageEmbed } = require('discord.js')
 const ytdl = require('ytdl-core');
 const {
 	AudioPlayerStatus,
@@ -35,20 +36,23 @@ module.exports = {
 
         if(interaction.options.getSubcommand() == 'link') {
             const url = interaction.options.getString('url');
+            interaction.reply("Now playing: " + url)
             const connection = joinVoiceChannel({
                 channelId: interaction.member.voice.channelId,
                 guildId: interaction.guildId,
                 adapterCreator: interaction.guild.voiceAdapterCreator
-            })
-    
+            })  
             const stream = ytdl(url, { filter: 'audioonly' });
             const resource = createAudioResource(stream, { inputType: StreamType.Arbitrary });
             const player = createAudioPlayer();
     
             player.play(resource);
             connection.subscribe(player);
-    
+            
             player.on(AudioPlayerStatus.Idle, () => connection.destroy());
+        }
+        if(interaction.options.getSubcommand() == 'search'){
+            interaction.reply("Prototype 2 Feature! Stay tuned for more details")
         }
     } 
 }
