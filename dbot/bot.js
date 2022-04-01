@@ -1,0 +1,59 @@
+const fs = require('fs')
+const dotenv = require('dotenv')
+const { Client, Collection, Intents } = require('discord.js')
+const mongoose = require('mongoose');
+// const profileSchema = require('./models/profileSchema')
+// const pollModel = require('./models/pollSchema')
+
+dotenv.config()
+
+const client = new Client({
+    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_BANS, Intents.FLAGS.GUILD_VOICE_STATES, Intents.FLAGS.GUILD_MESSAGES, 
+		Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_MEMBERS],
+})
+
+const TOKEN = process.env.BOT_TOKEN
+// ^^ Included GUILD MEMBERS intent ... guidlMembersAdd should work now
+client.commands = new Collection()
+const cooldowns =  new Collection();
+
+// Going to move this else where in a later version
+// to reduce visual cluter
+mongoose.connect(process.env.MONGO_ID,{
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+	keepAlive: true,
+}).then(()=>{
+	console.log("Database Connection established.");
+}).catch((err) => {
+	console.log("Error connecting to Mongo database.");
+	console.log(err);
+})
+
+const eventFiles = fs.readdirSync('./dbot/events').filter(file => file.endsWith('.js'));
+for (const file of eventFiles) {
+	const event = require(`./events/${file}`);
+	console.log(`Loaded event ${event.name}`);
+	if (event.once) {
+		client.once(event.name, (...args) => event.execute(...args));
+	} else {
+		client.on(event.name, (...args) => event.execute(...args));
+	}
+}
+
+const commandFiles = fs.readdirSync('./dbot/commands').filter(file => file.endsWith('.js'));
+
+for (const file of commandFiles) 
+{
+	const command = require(`./commands/${file}`);
+    client.commands.set(command.data.name, command);
+    console.log(`Loaded command ${command.data.name}`);
+}
+
+// Moved all the events in to the events folder
+
+client.login(TOKEN)
+
+module.exports = { 
+	client: client
+}
