@@ -63,3 +63,7 @@ and if you wish to deploy your newly added commands run the following command in
 ```bash
 npm run deploy
 ```
+
+We also have a website with a more user-friendly and easily traversable manual, you can visit it at d-bot.me
+
+With our repository: https://github.com/ThomasCross257/CSEBotWebsite
