@@ -1,26 +1,18 @@
-// Committed and taken care of by Thomas. 2/24/22
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { ContextMenuCommandBuilder } = require('@discordjs/builders');
 
 module.exports = {
-	data: new SlashCommandBuilder()
+	data: new ContextMenuCommandBuilder()
 		.setName('fix')
-		.setDescription('Fixes any Twitter link for desktop viewing.')
-        .addStringOption(option =>                                               
-                option.setName('link')                                              // Removed subcommand and replaced with options
-                    .setDescription('Fixes any Twitter link for desktop viewing')   // ----> No need for subcommand ... String Option is better suited
-                    .setRequired(true)),                                           
+        .setType(3),                                       
 	async execute(interaction) {
-        if(!interaction.isCommand()) return;
-		if(!interaction.guild.available){ 
-            await interaction.reply('I can not perform this operation in this guild.');
-        }
-        let link = interaction.options.getString('link');
-        if(link.includes("https://twitter.com")){
-            await interaction.reply(link.replace('https://twitter.com', 'https://fxtwitter.com')); // Echoes the URL specified by user with content replaced.
+        const message = interaction.targetMessage.content;
+        console.log(message);
+        if(message.includes("https://twitter.com")){
+            await interaction.reply(message.replace('https://twitter.com', 'https://fxtwitter.com') + " **(Fixed by D-Bot)**");
         }
         else{
-            await interaction.reply("This is not a valid twitter link.");
+            await interaction.reply({content: "This is not a valid twitter URL", ephemeral: true});
         }
-
+       
 	}
 }
