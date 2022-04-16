@@ -17,7 +17,7 @@ module.exports = {
 		var avatar = interaction.user.avatarURL(true);
 		avatar = avatar.replace('.webp','.png'); // Shoddy method of avoiding errors with image types. Necessary since avatarURL doesn't use
 		console.log(avatar);
-		const background = "https://cdn.discordapp.com/attachments/952666801077108916/952666810501705788/Default_Level.png"
+		const background = "https://cdn.discordapp.com/attachments/959575994371563620/964605963573289040/triangle-image.png"
 			profileModel.find({userID: interaction.user.id}, (err, user) => { //err is just a placeholder.
 				try{
 					const exp = Number(user[0].experience); // Must use [0] to index schemas. Think of each one like you would the trivia API.
