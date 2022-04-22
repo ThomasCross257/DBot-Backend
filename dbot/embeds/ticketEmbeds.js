@@ -1,10 +1,11 @@
 const { MessageEmbed } = require('discord.js');
 
-function TicketEmbedGen(UserID, ServerID, TicketID, Issue, Response, Resolved){
+function TicketEmbedGen(Username, UserID, ServerID, TicketID, Issue, Response, Resolved){
     let TicketEmbed = new MessageEmbed()
         .setColor('BLUE')
         .setTitle(TicketID)
         .addFields(
+            {name: 'Username: ', value: Username},
             {name: 'User ID: ', value: UserID},
             {name: 'Server ID', value: ServerID},
             {name: 'Problem: ', value: Issue},

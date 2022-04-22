@@ -12,7 +12,9 @@ module.exports = {
 	async execute(interaction) {
         const Issue = interaction.options.getString('message');
         const TicketID = "DBOT_D-" + Math.floor(Math.random() * 100000)
+        const username = interaction.user.username + "#" + interaction.user.discriminator;
         let SupportTicket = await ticketModel.create({
+            username: username,
             userID: interaction.member.user.id,
             serverID: interaction.guild.id,
             problem: Issue,
@@ -29,7 +31,7 @@ module.exports = {
                 console.log("------------------------")
                 console.log(SupportTicket)
                 console.log("------------------------")
-                interaction.reply({content:"Ticket Sent! We really appreciate you sendingt this in and we will get back to you as soon as possible! P.S, your ticket ID is " + TicketID + " keep it somewhere safe and don't lose it!", ephemeral: true});
+                interaction.reply({content:"Ticket Sent! We really appreciate you sendingt this in and we will get back to you as soon as possible! P.S, your ticket ID is __**" + TicketID + "**__ keep it somewhere safe for easy access. You can always check on your tickets on our support page at https://d-bot.me/support", ephemeral: true});
             }
         });
 	},
