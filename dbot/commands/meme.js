@@ -7,7 +7,7 @@ module.exports = {
 		.setName('meme')
 		.setDescription('Posts a funny meme'),
 	async execute(interaction) {
-		await axios.get('https://meme-api.herokuapp.com/gimme')
+		await axios.get('https://meme-api.herokuapp.com/gimme/wholesomememes') // This is for presentation purposes.
             .then((res) => {
                 console.log(res.data);
                 console.log(interaction)
