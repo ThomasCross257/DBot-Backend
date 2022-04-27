@@ -29,6 +29,10 @@ Currently D-Bot supports the following commands:
     - Allows the user to answer trivia commands within a set interval.
 - Poll
     - User can create a poll that will last for however many minutes the user specifies with a maximum of four options.
+- GuessTheWord
+    - Allows the user to guess a word given the definition.
+
+Additionally, users can join the D-Bot official server to add the CSUSB News webhook to their channel and receive automated messages from @CSUSBNews on Twitter to their channel.
     
 
 
