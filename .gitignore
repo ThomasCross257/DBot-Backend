@@ -132,3 +132,5 @@ dist
 #Nightly .env folder
 nightly
 normalbuild
+dbot/models/devSchema.js
+dbot/commands/devregister.js

@@ -13,6 +13,7 @@ const client = new Client({
 })
 
 const TOKEN = process.env.BOT_TOKEN
+const guildID = process.env.GUILD_ID;
 // ^^ Included GUILD MEMBERS intent ... guidlMembersAdd should work now
 client.commands = new Collection()
 const cooldowns =  new Collection();
@@ -43,11 +44,21 @@ for (const file of eventFiles) {
 
 const commandFiles = fs.readdirSync('./dbot/commands').filter(file => file.endsWith('.js'));
 
+
 for (const file of commandFiles) 
 {
 	const command = require(`./commands/${file}`);
     client.commands.set(command.data.name, command);
     console.log(`Loaded command ${command.data.name}`);
+}
+
+const customCommandFiles = fs.readdirSync(`./dbot/commands/custom/${guildID}`).filter(file => file.endsWith('.js'));
+
+for (const file of customCommandFiles) 
+{
+	const customCommand = require(`./commands/custom/${guildID}/${file}`);
+    client.commands.set(customCommand.data.name, customCommand);
+    console.log(`Loaded custom command ${customCommand.data.name}`);
 }
 
 // Moved all the events in to the events folder

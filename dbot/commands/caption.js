@@ -57,10 +57,12 @@ module.exports = {
         ctx.textAlign = "center";
         ctx.drawImage(bg, 0, 0, width, height);
         ctx.fillText(TopText, width / 2, height / 6.5, width);
-        ctx.strokeText(TopText, width, height / 6.5, width);
-        ctx.font = TextBounds(canvas, BottomText);
-        ctx.fillText(BottomText, width / 2, height, width);
-        ctx.strokeText(BottomText, width / 2, height, width);
+        ctx.strokeText(TopText, width / 2, height / 6.5, width);
+        if (BottomText != null){
+            ctx.font = TextBounds(canvas, BottomText);
+            ctx.fillText(BottomText, width / 2, height, width);
+            ctx.strokeText(BottomText, width / 2, height, width); 
+        }
         console.log(ctx);
         const captionedImage = new MessageAttachment(canvas.toBuffer(), 'captionpic.png');
 

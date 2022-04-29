@@ -20,14 +20,6 @@ module.exports = {
                 .addStringOption(option => 
                     option.setName('url')
                         .setDescription('URL to Youtube video')
-                        .setRequired(true)))
-        .addSubcommand(subcommand =>
-            subcommand
-                .setName('search')
-                .setDescription('Enter a search result')
-                .addStringOption(option =>
-                    option.setName('query')
-                        .setDescription('Enter your query for search result')
                         .setRequired(true))),
     async execute(interaction) {
         if(!interaction.isCommand()) return;
@@ -50,9 +42,6 @@ module.exports = {
             connection.subscribe(player);
             
             player.on(AudioPlayerStatus.Idle, () => connection.destroy());
-        }
-        if(interaction.options.getSubcommand() == 'search'){
-            interaction.reply("Prototype 2 Feature! Stay tuned for more details")
         }
     } 
 }

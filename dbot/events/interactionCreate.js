@@ -14,6 +14,6 @@ module.exports = {
 		}
 		if (!command){
 			return;
-		} 
+		}	
 	},
 };
