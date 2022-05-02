@@ -47,15 +47,19 @@ module.exports = {
 					console.log(error);
 					try {
 						console.log(userLevel.id);
-						let newUser = profileModel.create({ // Potential security vulnerability. 
-							userID: userLevel.id, // Will register any user with the database with a slash command call.
-							serverID: interaction.guild.id, // Works if someone decides to use it themselves or if another user wants to know their level.
-							experience: 0,
-							level: 1,
-						})
-
-						interaction.reply({content: "You, or the person that you tried to look at wasn't registered, but you or they are now! Try this command again.", ephemeral: true});
-
+						if(userLevel.bot != false){
+							interaction.reply({content: "You can't register a bot with the points system!", ephemeral: true}); // Prevents users from filling up the database with bots.
+						}
+						else{
+							let newUser = profileModel.create({ // Potential security vulnerability. 
+								userID: userLevel.id, // Will register any user with the database with a slash command call.
+								serverID: interaction.guild.id, // Works if someone decides to use it themselves or if another user wants to know their level.
+								experience: 0,
+								level: 1,
+							})
+							interaction.reply({content: "You, or the person that you tried to look at wasn't registered, but you or they are now! Try this command again.", ephemeral: true});
+						}
+						
 					}
 					catch(err){
 						console.log(err);
