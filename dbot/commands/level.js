@@ -14,11 +14,19 @@ module.exports = {
 				.setRequired(false)),
 	async execute(interaction) {
 		console.log(interaction)
-		var avatar = interaction.user.avatarURL(true);
-		avatar = avatar.replace('.webp','.png'); // Shoddy method of avoiding errors with image types. Necessary since avatarURL doesn't use
-		console.log(avatar);
 		const background = "https://cdn.discordapp.com/attachments/959575994371563620/964605963573289040/triangle-image.png"
-			profileModel.find({userID: interaction.user.id}, (err, user) => { //err is just a placeholder.
+		if (interaction.options.getUser('user') != null){
+			var userLevel = interaction.options.getUser('user');
+		}
+		else{
+			var userLevel = interaction.user;
+		}
+		var avatar = userLevel.avatarURL(true);
+		avatar = avatar.replace('.webp','.png');
+		console.log(avatar);
+		console.log(typeof(userLevel));
+		console.log(userLevel);
+			profileModel.find({userID: userLevel.id}, (err, user) => { //err is just a placeholder.
 				try{
 					const exp = Number(user[0].experience); // Must use [0] to index schemas. Think of each one like you would the trivia API.
 					console.log(exp);
@@ -28,8 +36,8 @@ module.exports = {
 					.setBackground("IMAGE", background)
 					.setRequiredXP(500000)
 					.setProgressBar("#FFFFFF", "COLOR")
-					.setUsername(interaction.user.username)
-					.setDiscriminator(interaction.member.user.discriminator);
+					.setUsername(userLevel.username)
+					.setDiscriminator(userLevel.discriminator);
 					levelScreen.build().then(data => {
 					const attachment = new MessageAttachment(data, "RankCard.png");
 					interaction.reply({files: [attachment]});
@@ -38,15 +46,15 @@ module.exports = {
 				catch(error){
 					console.log(error);
 					try {
-						console.log(interaction.member.user.id);
-						let newUser = profileModel.create({
-							userID: interaction.member.user.id,
-							serverID: interaction.guild.id,
+						console.log(userLevel.id);
+						let newUser = profileModel.create({ // Potential security vulnerability. 
+							userID: userLevel.id, // Will register any user with the database with a slash command call.
+							serverID: interaction.guild.id, // Works if someone decides to use it themselves or if another user wants to know their level.
 							experience: 0,
 							level: 1,
 						})
 
-						interaction.reply("You weren't registered, but you are now! Try this command again.");
+						interaction.reply({content: "You, or the person that you tried to look at wasn't registered, but you or they are now! Try this command again.", ephemeral: true});
 
 					}
 					catch(err){
