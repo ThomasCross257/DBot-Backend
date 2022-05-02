@@ -5,6 +5,8 @@ const { REST } = require('@discordjs/rest')
 const { Routes } = require('discord-api-types/v9')
 const dotenv = require('dotenv')
 
+function customCommandRegister(){
+
 dotenv.config()
 
 const clientId = process.env.CLIENT_ID
@@ -25,3 +27,6 @@ const rest = new REST({ version: '9' }).setToken(token);
 rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: customCommands })
 	.then(() => console.log('Successfully registered custom commands.'))
 	.catch(console.error);
+}
+
+module.exports = customCommandRegister;
