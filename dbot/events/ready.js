@@ -65,7 +65,7 @@ module.exports = {
 				*/
 				
 				
-				if((userInput) == correctAnswer.toLowerCase()) {
+				if((userInput.toLowerCase()) == correctAnswer.toLowerCase()) {
 					message.channel.send("**Correct answer! You are big brained! :brain: Points deposited.**")
 					profileModel.updateOne({userID: user_id,},
 						{$inc: {experience: 10}}).exec();
