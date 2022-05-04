@@ -4,7 +4,6 @@
     "deploy": "node ./dbot/deploy-commands.js",
     "custom_deploy": "node ./dbot/custom-command-Deploy.js"
   },
-  "type": "module",
   "dependencies": {
     "@alexfrankcodes/random-emoji": "^1.0.1",
     "@discordjs/builders": "^0.12.0",
