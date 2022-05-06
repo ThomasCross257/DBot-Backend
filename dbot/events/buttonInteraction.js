@@ -1,5 +1,5 @@
 const pollModel = require('../models/pollSchema');
-
+const devModel = require('../models/devSchema');
 module.exports = {
     name: 'interactionCreate',
     async execute(interaction) {
@@ -80,9 +80,23 @@ module.exports = {
 				}
 				
 			}
+			/* This is only for classifying individuals as developers
+			if (interaction.customId.includes('DEV_BUTTON')){ 
+				const UserID = interaction.member.user.id;
+				devModel.find({userID: UserID }, (err,res) => {
+					console.log(res);
+					const username = interaction.user.username + "#" + interaction.user.discriminator;
+						let NewDeveloper = devModel.create({
+							username: username,
+							userID: UserID,
+					});
+					interaction.reply({content:"You are now registered as a developer!", ephemeral: true})
+				})
 		}
+		*/
 		else{
 			return;
 		}
     }
+}
 }

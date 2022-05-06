@@ -1,0 +1,10 @@
+___ is the hardware component used to store data that is actively being used by a processor. When needed, information flows to RAM storage from long-term secondary storage—typically a hard drive.
+The ___ is the processing chip that serves as the "brains" of a device that interprets (or processes) the digital instructions provided by applications.
+____ are the smallest piece of information used by a computer.
+When you save a file to your computer, it it sent to ___. ___ refers to the long-term data storage options found in a device and includes hard disk drives (HDD) and solid state drives (SSD)
+___ is memory that can only be read from and is not electronically modifiable after being manufactured. Computers use this to store critical foundational information like start-up processes and software instructions.
+___ are simply specific procedures used to solve computational problems.
+___ is a software go-between that brings information from one application to another. It allows applications to communicate with one another while preserving some security measures for each end point.
+___ is a function in programming with binary choices, like “Yes or No” and “True or False.” This serves as a basic building block of programming logic.
+A ___is a programming error that causes unexpected glitches or problems for a program’s end user. 
+___ is the process of taking code that’s written in a high-level language (like C++) by human developers and translating it into machine-readable code.

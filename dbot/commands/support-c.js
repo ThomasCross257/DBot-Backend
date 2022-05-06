@@ -18,7 +18,7 @@ module.exports = {
 					return interaction.reply("Invalid Ticket number! Your number should look like: DBOT_D- 00000");
 				} else {
 					console.log(user);
-					
+					const username = user[0].username;
 					const userID = user[0].userID;
 					console.log(userID);
 					const serverID = user[0].serverID;
@@ -34,11 +34,10 @@ module.exports = {
 					response = user[0].resolved;
 					console.log(response);
 					}
-					const ticketEmbed = TicketEmbedGen(userID, serverID, ticketID, problem, response, resolved);
+					const ticketEmbed = TicketEmbedGen(username, userID, serverID, ticketID, problem, response, resolved);
 					interaction.reply({embeds:[ticketEmbed], ephemeral: true});
 				}
 			});
 		}
-        
 	},
 };

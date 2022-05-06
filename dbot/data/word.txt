@@ -1,0 +1,10 @@
+RAM
+CPU
+Bit
+Secondary storage 
+ROM
+Algorithm
+API
+Boolean
+Bug
+Compiling

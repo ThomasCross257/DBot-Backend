@@ -1,10 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageAttachment } = require('discord.js');
-const wait = require('node:util').promisify(setTimeout);
-const sharp = require("sharp")
-const request = require('request')
-const fs = require('fs')
-
+const { MessageAttachment } = require('discord.js')
+const Canvas = require('canvas');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -13,56 +9,63 @@ module.exports = {
         .addStringOption(option =>                                               
                 option.setName('link')
                     .setDescription('Image URL') 
-                    .setRequired(true)),
-        /*
+                    .setRequired(true))
         .addStringOption(option => 
-            option.setName('caption')
-                .setDescription('Text to add')
-                .setRequired(true)),
-        */
+            option.setName('toptext')
+                .setDescription('Top Text of the meme')
+                .setRequired(true))
+        .addStringOption(option => 
+            option.setName('bottomtext')
+                .setDescription('Bottom Text of the meme')
+                .setRequired(false)),
 	async execute(interaction) {
         if(!interaction.isCommand()) return;
 		if(!interaction.guild.available){ 
             await interaction.reply('I can not perform this operation in this guild.');
         }
-        await interaction.reply('Currently In Development. Will be released in prototype 2');
-        /*
-        const link = interaction.options.getString('link');
-        //interaction.options.getString('caption');
-        const caption = "Russia Gaming";
-        const raw_imageDIR = "./Images/conversion/test.png";
-        const capDIR = "./Images/conversion/caption.png";
-        const cap_imageDIR = "./Images/conversion/CaptionedPic.png";
-        try{
-        await interaction.deferReply(); // Must be called in order to avoid the process from becoming an orphan.
-        request.head(link, (err, res, body)=>{
-            request(link)
-                .pipe(fs.createWriteStream(raw_imageDIR))
-        })
-        const img_width = 1510;
-        const img_height = 1521;
-       console.log(await sharp(raw_imageDIR).metadata());
-        const caption_height = img_height + img_height *.5;
+        const IMG_URL = interaction.options.getString('link');
+        const TopText = interaction.options.getString('toptext');
+        const BottomText = interaction.options.getString('bottomtext');
+        console.log(TopText);
+        console.log(BottomText)
+        const bg = await Canvas.loadImage(IMG_URL);
+        const width = bg.width;
+        const height = bg.height;
+        const canvas = Canvas.createCanvas(width, height);
+        const ctx = canvas.getContext("2d");
+        console.log(canvas);
+        // Used Discord.js tutorial implementation.
+        const TextBounds = (canvas, text) => {
+            const context = canvas.getContext('2d');
         
-        const svgImage = `
-            <svg width="${img_width}" height="${img_height}">
-              <style>
-              .title { fill: "white"; stroke: "black"; stroke-width: 10px; font-size: 140px; font-weight: bold;}
-              </style>
-              <text x="50%" y="10%" text-anchor="middle" class="title">${caption}</text>
-            </svg>
-        `;
-        const svgBuffer = Buffer.from(svgImage); // Something is going wrong here and there needs to be further tests made. Sometimes this will return the previous image as opposed to the image the user has requested.
-        // Will need another engineer to test further.
-        await sharp(svgBuffer).toFile(capDIR);
-        await sharp(raw_imageDIR).composite([{input: capDIR,top: 100, left: 0,},]).toFile(cap_imageDIR); //Images can become pretty large, will take time to upload. 
-        const file = new MessageAttachment(cap_imageDIR);
-        await interaction.editReply({files:[file]}); //Image resizing in the future?
+            // Declare a base size of the font
+            let fontSize = 100;
+        
+            do {
+                // Assign the font to the context and decrement it so it can be measured again
+                context.font = `${fontSize -= 10}px Impact`;
+                // Compare pixel width of the text to the canvas minus the approximate avatar size
+            } while (context.measureText(text).width > canvas.width - 300);
+        
+            // Return the result to use in the actual canvas
+            return context.font;
+        };
+
+        ctx.font = TextBounds(canvas, TopText);
+        ctx.fillStyle = '#FFFFFF';
+        ctx.strokeStyle = 'black';
+        ctx.textAlign = "center";
+        ctx.drawImage(bg, 0, 0, width, height);
+        ctx.fillText(TopText, width / 2, height / 6.5, width);
+        ctx.strokeText(TopText, width / 2, height / 6.5, width);
+        if (BottomText != null){
+            ctx.font = TextBounds(canvas, BottomText);
+            ctx.fillText(BottomText, width / 2, height, width);
+            ctx.strokeText(BottomText, width / 2, height, width); 
+        }
+        console.log(ctx);
+        const captionedImage = new MessageAttachment(canvas.toBuffer(), 'captionpic.png');
+
+        await interaction.reply({files: [captionedImage]});
     }
-    catch(err){
-        await interaction.editReply({ content: "Error. Image did not process correctly!", ephemeral: true })
-        console.log(err);
-    }
-    */
-	}
 }

@@ -7,18 +7,25 @@ module.exports = {
 		.setName('meme')
 		.setDescription('Posts a funny meme'),
 	async execute(interaction) {
-		await axios.get('https://meme-api.herokuapp.com/gimme')
+		await axios.get('https://meme-api.herokuapp.com/gimme/wholesomememes') // This is for presentation purposes.
             .then((res) => {
                 console.log(res.data);
-                const url = res.data.url;
-                const subreddit = res.data.subreddit;
-                const title = res.data.title;
-                const MemeEmbed = new MessageEmbed()
-                    .setColor("#4281A4")
-                    .setTitle(title)
-                    .addField("From: ", "r/" + subreddit, true)
-                    .setImage(url);
-                interaction.reply({embeds: [MemeEmbed]});
+                console.log(interaction)
+                if (res.data.nsfw === true && interaction.channel.nsfw != true){
+                    interaction.reply("This channel is not designated as NSFW. change the settings and try again.")                   
+                }
+                else{
+                    const url = res.data.url;
+                    const subreddit = res.data.subreddit;
+                    const title = res.data.title;
+                    const MemeEmbed = new MessageEmbed()
+                        .setColor("#4281A4")
+                        .setTitle(title)
+                        .addField("From: ", "r/" + subreddit, true)
+                        .setImage(url);
+                    interaction.reply({embeds: [MemeEmbed]});
+                    
+                }
                 return;
             })
             .catch((err) => {

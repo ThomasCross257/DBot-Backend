@@ -128,3 +128,9 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+#Nightly .env folder
+nightly
+normalbuild
+dbot/models/devSchema.js
+dbot/commands/devregister.js

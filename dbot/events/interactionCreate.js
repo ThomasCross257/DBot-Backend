@@ -1,10 +1,8 @@
-const pollModel = require('../models/pollSchema')
-
 module.exports = {
 	name: 'interactionCreate',
 	async execute(interaction) {
 		client = interaction.client
-		if (!interaction.isCommand()) {
+		if (!interaction.isCommand() && !interaction.isContextMenu()) {
 			return;
 		}
 		const command = client.commands.get(interaction.commandName);
@@ -16,6 +14,6 @@ module.exports = {
 		}
 		if (!command){
 			return;
-		} 
+		}	
 	},
 };

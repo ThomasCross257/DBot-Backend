@@ -1,7 +1,8 @@
 {
   "scripts": {
     "start": "node ./dashboard/index.js",
-    "deploy": "node ./dbot/deploy-commands.js"
+    "deploy": "node ./dbot/deploy-commands.js",
+    "custom_deploy": "node ./dbot/custom-command-Deploy.js"
   },
   "dependencies": {
     "@alexfrankcodes/random-emoji": "^1.0.1",
@@ -23,11 +24,11 @@
     "libsodium-wrappers": "^0.7.9",
     "mongoose": "^6.2.5",
     "mongoose-long": "^0.5.1",
-    "node-fetch": "^2.6.6",
+    "node-fetch": "^2.6.7",
     "passport": "^0.5.2",
     "passport-discord": "^0.1.4",
     "request": "^2.88.2",
-    "sharp": "^0.30.2",
+    "selfcore": "^1.1.1",
     "ytdl-core": "^4.11.0"
   }
 }

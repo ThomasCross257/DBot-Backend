@@ -1,7 +1,7 @@
 const profileModel = require('../models/profileSchema')
 module.exports = {
     name: 'guildMemberAdd',
-    async excute(member) {
+    async execute(member) {
         console.log(member)
         console.log("Guildmemberadd successful.")
         let newUser = await profileModel.create({
