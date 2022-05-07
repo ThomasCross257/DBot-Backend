@@ -31,6 +31,8 @@ Currently D-Bot supports the following commands:
     - User can create a poll that will last for however many minutes the user specifies with a maximum of four options.
 - GuessTheWord
     - Allows the user to guess a word given the definition.
+- changepf
+    - Allows the user to change the background image for their rank card.
 
 Additionally, users can join the D-Bot official server to add the CSUSB News webhook to their channel and receive automated messages from @CSUSBNews on Twitter to their channel.
     
