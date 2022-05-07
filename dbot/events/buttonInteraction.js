@@ -1,5 +1,6 @@
 const pollModel = require('../models/pollSchema');
-const devModel = require('../models/devSchema');
+const profileModel = require('../models/profileSchema');
+
 module.exports = {
     name: 'interactionCreate',
     async execute(interaction) {
@@ -15,6 +16,38 @@ module.exports = {
 				}
 				interaction.reply({content:"Your response has been recorded.", ephemeral: true});
 			}
+			if (interaction.customId.includes('pf')) { //Profile change interaction manager
+				const customID = interaction.customId
+				const pfOption = customID.substr(1,4)
+				console.log(pfOption)
+				
+				if (pfOption == "pf_1"){
+					profileModel.updateOne({userID: interaction.user.id,},
+						{$set: {pfSelection: 0}}).exec();
+						console.log("SUCCESS");
+				}
+				if(pfOption == "pf_2"){
+					profileModel.updateOne({userID: interaction.user.id,},
+						{$set: {pfSelection: 1}}).exec();
+						console.log("SUCCESS");
+				}
+				if(pfOption == "pf_3"){
+					profileModel.updateOne({userID: interaction.user.id,},
+						{$set: {pfSelection: 2}}).exec();
+						console.log("SUCCESS");
+				}
+				
+				if(pfOption == "pf_4"){
+					profileModel.updateOne({userID: interaction.user.id,},
+						{$set: {pfSelection: 3}}).exec();
+						console.log("SUCCESS");
+					
+				}
+				interaction.reply({content:"Your response has been recorded.", ephemeral: true});
+			}
+				
+				
+			
 			if (interaction.customId.includes('PollButton')){  // Poll Interaction Manager
 				const customID = interaction.customId
 				const IDArr = customID.split(" ");
@@ -94,9 +127,9 @@ module.exports = {
 				})
 		}
 		*/
+		}
 		else{
 			return;
 		}
     }
-}
 }
