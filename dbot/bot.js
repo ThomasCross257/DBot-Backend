@@ -52,6 +52,8 @@ for (const file of commandFiles)
     console.log(`Loaded command ${command.data.name}`);
 }
 
+/* This wasn;t working and its too late at night for me to fix
+   Please have mercy on my soul
 const customCommandFiles = fs.readdirSync(`./dbot/commands/custom/${guildID}`).filter(file => file.endsWith('.js'));
 
 for (const file of customCommandFiles) 
@@ -60,7 +62,7 @@ for (const file of customCommandFiles)
     client.commands.set(customCommand.data.name, customCommand);
     console.log(`Loaded custom command ${customCommand.data.name}`);
 }
-
+*/
 // Moved all the events in to the events folder
 
 client.login(TOKEN)

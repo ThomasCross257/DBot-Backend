@@ -1,5 +1,5 @@
 const pollModel = require('../models/pollSchema');
-const devModel = require('../models/devSchema');
+
 module.exports = {
     name: 'interactionCreate',
     async execute(interaction) {
