@@ -72,6 +72,20 @@ npm run deploy
 
 Optionally, you download these two repositories if you'd like to create and run your own react website and create custom commands for your own server.
 
+Clone these repositories
+```bash
+git clone https://github.com/lumix103/dbot_api
+git clone https://github.com/lumix103/dbot_dashboard
+
+cd dbot_api
+cd dbot_dashboard
+```
+run npm i in the terminal for both directories before moving any further.
+
+Run dbot_api first by compliling the index file, then run dbot_dashboard using npm run dev.
+
+You will now be able to run custom commands through your own bot on your own MongoDB database or ours if you want to be a leecher :p.
+
 We also have a website with a more user-friendly and easily traversable manual, you can visit it at d-bot.me
 
 With our repository: https://github.com/ThomasCross257/CSEBotWebsite
