@@ -3,7 +3,7 @@
         <br>
             <img src="https://github.com/ThomasCross257/CSEBot-Project/blob/prototype_1/res/D-BotLogo2.png?raw=true" alt="DBot">
         <br>
-            CSEBot - Dbot: Prototype-1
+            CSEBot - Dbot:
         <br>
     </h1>
 </div>
@@ -31,7 +31,8 @@ Currently D-Bot supports the following commands:
     - User can create a poll that will last for however many minutes the user specifies with a maximum of four options.
 - GuessTheWord
     - Allows the user to guess a word given the definition.
-
+- Caption
+    - Allows the user to caption images as they see fit in impact font styling
 Additionally, users can join the D-Bot official server to add the CSUSB News webhook to their channel and receive automated messages from @CSUSBNews on Twitter to their channel.
     
 
@@ -67,6 +68,8 @@ and if you wish to deploy your newly added commands run the following command in
 ```bash
 npm run deploy
 ```
+
+Optionally, you download these two repositories if you'd like to create and run your own react website and create custom commands for your own server.
 
 We also have a website with a more user-friendly and easily traversable manual, you can visit it at d-bot.me
 
