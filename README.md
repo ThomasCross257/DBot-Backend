@@ -33,6 +33,7 @@ Currently D-Bot supports the following commands:
     - Allows the user to guess a word given the definition.
 - Caption
     - Allows the user to caption images as they see fit in impact font styling
+
 Additionally, users can join the D-Bot official server to add the CSUSB News webhook to their channel and receive automated messages from @CSUSBNews on Twitter to their channel.
     
 
