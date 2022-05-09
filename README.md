@@ -3,7 +3,7 @@
         <br>
             <img src="https://github.com/ThomasCross257/CSEBot-Project/blob/prototype_1/res/D-BotLogo2.png?raw=true" alt="DBot">
         <br>
-            CSEBot - Dbot:
+            CSEBot - Dbot
         <br>
     </h1>
 </div>
