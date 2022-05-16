@@ -6,7 +6,7 @@ const app = express()
 const cors = require("cors");
 require('dotenv').config()
 
-const PORT = process.env.PORT | 3001;
+const PORT = process.env.PORT | 8000;
 
 const SERVER_SECRET = process.env.SERVER_SECRET;
 

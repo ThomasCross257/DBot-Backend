@@ -32,7 +32,7 @@ module.exports = {
                     interaction.guild.members.kick(target.id)
                 else
                     interaction.guild.members.kick(target.id, reason)
-                await interaction.reply('Kicked user');
+                await interaction.reply({content:'Kicked user', ephemeral: true});
             } catch (error) {
                 await interaction.reply('An error occured...');
             }

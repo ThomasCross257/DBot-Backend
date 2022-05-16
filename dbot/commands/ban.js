@@ -30,7 +30,7 @@ module.exports = {
                 return interaction.reply('Invalid option! Days can only range from 0 to 7.')
             const going_to_ban = await interaction.guild.members.fetch(target);
             interaction.guild.members.ban(going_to_ban.id, {days: days, reason: reason}).then(() => {
-                interaction.reply(`Banned ${going_to_ban.user.tag}.`);
+                interaction.reply({content:"Banned " + going_to_ban.user.tag , ephemeral: true});
             }
             ).catch(err => {
                 interaction.reply('Could not ban the user.');
