@@ -3,12 +3,11 @@
         <br>
             <img src="https://github.com/ThomasCross257/CSEBot-Project/blob/prototype_1/res/D-BotLogo2.png?raw=true" alt="DBot">
         <br>
-            CSEBot - Dbot
+            Dbot
         <br>
     </h1>
 </div>
 
-CSEBot is a Discord bot called D-Bot, for our CSE 4550 class.  
 D-Bot is fully modular, which allows you to plug and play with commands at ease.  
 Currently D-Bot supports the following commands:  
 - Ban
